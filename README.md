@@ -13,5 +13,4 @@ cargo watch -q -c -w tests/ -x "test -q quick_dev -- --nocapture"
 
 https://www.youtube.com/watch?v=XZtlD_m59sM
 
-Current position:
-6:43
+Current position: 16
