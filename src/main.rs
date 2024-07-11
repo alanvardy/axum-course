@@ -11,6 +11,7 @@ use axum::{
 use serde::Deserialize;
 use tower_http::services::ServeDir;
 mod error;
+mod web;
 pub use self::error::{Error, Result};
 
 #[tokio::main]
