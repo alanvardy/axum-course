@@ -1,16 +1,22 @@
 use crate::{Error, Result};
-use axum::Json;
+use axum::{routing::post, Json, Router};
 use serde::Deserialize;
 use serde_json::{json, Value};
+use tower_cookies::{Cookie, Cookies};
 
-async fn api_login(payload: Json<LoginPayload>) -> Result<Json<Value>> {
+pub fn routes() -> Router {
+    Router::new().route("/api/login", post(api_login))
+}
+
+async fn api_login(cookies: Cookies, payload: Json<LoginPayload>) -> Result<Json<Value>> {
     // TODO implement read db/auth logic
 
     if payload.username != "demo1" || payload.pwd != "welcome" {
         return Err(Error::LoginFail);
     };
 
-    // TODO set cookies
+    // TODO make a real auth token
+    cookies.add(Cookie::new("auth-token", "user-1.exp.sign"));
 
     let body = Json(json!({
         "result": {
